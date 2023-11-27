@@ -1,0 +1,138 @@
+{% extends "./modulos.html" %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/registro.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  
+<main>
+    
+
+  <div class="album py-5 bg-body-tertiary">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div id="meet"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<br>
+
+<div class="container"> 
+  <button type="button" class="btn btn-primary mb-3"  data-bs-toggle="modal" data-bs-target="#exampleModal">Suscribirse</button>
+  
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 id="modaltext" class="modal-title fs-5" id="exampleModalLabel">Suscribirse</h6>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="modaltext" class="modal-body">
+          ¿Esta seguro que realmente quiere suscribirse?<br>
+          Precio de suscripcion:
+          $2.500
+        </div>
+        
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="deshabilitarBoton()">Suscribirse</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+
+</div>
+
+
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/reloj.js' %}"></script>
+<script src="{% static 'js/carrito.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/oscuro.js' %}"></script>
+<script src="https://meet.jit.si/external_api.js"></script>
+<script>
+  function deshabilitarBoton() {
+  // Cambia el texto del botón
+  document.getElementById('exampleModal').getElementsByClassName('btn btn-primary')[0].textContent = 'Suscrito';
+
+  // Deshabilita el botón
+  document.getElementById('exampleModal').getElementsByClassName('btn btn-primary')[0].disabled = true;
+}
+</script>
+
+<script>
+
+  var interfaceConfig = {
+
+    TOOLBAR_BUTTONS: [
+        'microphone',
+        'camera',
+        'closedcaptions',
+        'desktop',
+        'fullscreen',
+        'fodeviceselection',
+        'hangup',                //SAlir
+        'profile',
+        // 'info',               //ver el link
+        'chat',
+        'recording',             //grabar
+        'livestreaming',      //admin lo puede hacer
+        'etherpad',
+        // 'sharedvideo',        //admin lo puede hacer
+        'settings',
+        'raisehand',              //manito
+        'videoquality',           //calidad de video
+        'filmstrip',
+        'invite',
+        'feedback',
+        'stats',
+        'shortcuts',
+        'tileview',
+        'videobackgroundblur',
+        'download',
+        'help',
+        'mute-everyone',    //administrador
+        'e2ee'
+    ],
+
+    SETTINGS_SECTIONS: [
+        'devices',
+        'language',
+        'moderator',
+        'profile',
+        // 'calendar'
+    ],
+    SHOW_CHROME_EXTENSION_BANNER: false
+};
+
+const domain = 'meet.jit.si';
+const options = {
+    roomName: 'GamingCrewTV',
+    width: '120%',
+    height: 700,
+    parentNode: document.querySelector('#meet'),
+    userInfo: {
+        email: "{{ usuario.email }}",
+        displayName: "{{ usuario.username }}",
+    },
+    noSsl: true,
+    interfaceConfigOverwrite: interfaceConfig,
+};
+const api = new JitsiMeetExternalAPI(domain, options);
+
+</script>
+{% endblock %}

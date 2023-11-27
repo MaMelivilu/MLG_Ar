@@ -1,0 +1,49 @@
+{% extends "./modulos.html" %}
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/registro.css' %}">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block body %}
+  
+  
+<div class="container-items container-md">
+  {% for p in juegos %}
+    <div class="item" style="width: 190px; height: 246px; margin-top: 50px;">
+      <figure>
+        <a class="btn btn-link" href="/streams">
+          <img src="{{p.img_url.url}}" class="card-img-top" alt="juegos">
+        </a>
+      </figure>
+      <div class="info-product">
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+  
+ 
+
+
+    
+{% endblock %}
+
+
+
+
+      {% block script %}
+      
+      <script src="{% static 'js/reloj.js' %}"></script>
+      <script src="{% static 'js/carrito.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/oscuro.js' %}"></script>
+      <script src="{% static 'js/api.js' %}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"></script>
+      {% endblock %}  
+</body>
+</html>
